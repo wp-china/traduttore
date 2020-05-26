@@ -67,6 +67,11 @@ abstract class Base implements WebhookHandler {
 					$secret = TRADUTTORE_GITLAB_SYNC_SECRET;
 				}
 				break;
+			case Gitea::class:
+				if ( defined( 'TRADUTTORE_GITEA_SYNC_SECRET' ) ) {
+					$secret = TRADUTTORE_GITEA_SYNC_SECRET;
+				}
+				break;
 		}
 
 		$project_secret = $project ? $project->get_repository_webhook_secret() : null;

@@ -9,7 +9,7 @@
 
 namespace Required\Traduttore;
 
-use Required\Traduttore\Repository\{Bitbucket, GitHub, GitLab};
+use Required\Traduttore\Repository\{Bitbucket, GitHub, GitLab, Gitea};
 
 /**
  * RepositoryFactory class.
@@ -39,6 +39,9 @@ class RepositoryFactory {
 				break;
 			case Repository::TYPE_GITLAB:
 				$repository = new GitLab( $project );
+				break;
+			case Repository::TYPE_GITEA:
+				$repository = new Gitea( $project );
 				break;
 		}
 

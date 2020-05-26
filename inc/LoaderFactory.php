@@ -37,6 +37,7 @@ class LoaderFactory {
 				Repository::TYPE_BITBUCKET,
 				Repository::TYPE_GITHUB,
 				Repository::TYPE_GITLAB,
+				Repository::TYPE_GITEA,
 			],
 			true
 		) ) {

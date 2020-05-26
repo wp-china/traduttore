@@ -10,7 +10,7 @@
 namespace Required\Traduttore;
 
 use Required\Traduttore\WebhookHandler\{
-	Bitbucket, GitHub, GitLab
+	Bitbucket, Gitea, GitHub, GitLab
 };
 use WP_REST_Request;
 
@@ -31,7 +31,12 @@ class WebhookHandlerFactory {
 	public function get_handler( WP_REST_Request $request ): ?WebhookHandler {
 		$handler = null;
 
-		if ( $request->get_header( 'x-github-event' ) ) {
+		/**
+		 * Gitea's header contains both GitHub and Gogs events, so it should be ranked first
+		 */
+		if ( $request->get_header( 'x-gitea-event' ) ) {
+			$handler = new Gitea( $request );
+		} elseif ( $request->get_header( 'x-github-event' ) ) {
 			$handler = new GitHub( $request );
 		} elseif ( $request->get_header( 'x-gitlab-event' ) ) {
 			$handler = new GitLab( $request );
