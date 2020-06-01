@@ -76,6 +76,7 @@ class Export {
 	 */
 	public function export_strings(): ?array {
 		$entries = GP::$translation->for_export( $this->project->get_project(), $this->translation_set, [ 'status' => 'current' ] );
+		$entries += GP::$translation->for_export( $this->project->get_project(), $this->translation_set, [ 'status' => 'fuzzy' ] );
 
 		if ( ! $entries ) {
 			return null;
