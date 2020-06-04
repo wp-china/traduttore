@@ -174,6 +174,7 @@ class Export {
 			);
 
 			$sources = array_unique( $sources );
+			$sources = $sources ?: ['php'];
 
 			foreach ( $sources as $source ) {
 				$mapping[ $source ][] = $entry;
