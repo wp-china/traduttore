@@ -143,7 +143,7 @@ class ProjectLocator {
 		$meta_key = '_traduttore_repository_url';
 
 		// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
-		$query = $wpdb->prepare( "SELECT object_id FROM `$wpdb->gp_meta` WHERE `object_type` = 'project' AND `meta_key` = %s AND `meta_value` LIKE %s LIMIT 1", $meta_key, '%' . $wpdb->esc_like( $project ) . '%' );
+		$query = $wpdb->prepare( "SELECT object_id FROM `$wpdb->gp_meta` WHERE `object_type` = 'project' AND `meta_key` = %s AND `meta_value` LIKE %s LIMIT 1", $meta_key, $wpdb->esc_like( $project ) );
 
 		// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
 		$result = $wpdb->get_row( $query );
@@ -174,7 +174,7 @@ class ProjectLocator {
 		$table = GP::$project->table;
 
 		// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
-		$query = $wpdb->prepare( "SELECT * FROM $table WHERE source_url_template LIKE %s LIMIT 1", '%' . $wpdb->esc_like( $project ) . '%' );
+		$query = $wpdb->prepare( "SELECT * FROM $table WHERE source_url_template LIKE %s LIMIT 1", '%' . $wpdb->esc_like( $project ). '/%' );
 
 		// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
 		$gp_project = GP::$project->coerce( $wpdb->get_row( $query ) );
